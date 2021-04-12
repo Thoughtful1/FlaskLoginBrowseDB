@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head></head>
+   <body>
+
+      <h3>
+         Flask SQLAlchemy example
+      </h3>
+
+       <h3>
+         <a href = "{{ url_for('logout') }}">Logout</a>
+      </h3>
+
+      <hr/>
+     <!-- {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %} --!>
+
+      <h3>Students (<a href = "{{ url_for('new') }}">Add Student
+         </a>)</h3>
+
+      <table>
+         <thead>
+            <tr>
+               <th>Name</th>
+               <th>City</th>
+               <th>Address</th>
+               <th>Pin</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for student in students %}
+               <tr>
+                  <td>{{ student.name }}</td>
+                  <td>{{ student.city }}</td>
+                  <td>{{ student.addr }}</td>
+                  <td>{{ student.pin }}</td>
+                  <td><form method="POST" action="{{ url_for('delete', pid=student.id) }}">
+                     <button id="btn-delete" type="submit" class="btn btn-danger">delete</button>
+               </form></td>
+                      <td><form method="GET" action="{{ url_for('edit', pid=student.id) }}">
+                     <button id="btn-delete" type="submit" class="btn btn-danger">edit</button>
+               </form></td>
+                   </tr>
+                  {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                  <ul class=flashes>
+                  {% for message in messages %}
+                  <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            {% endfor %}
+         </tbody>
+      </table>
+
+   </body>
+</html>

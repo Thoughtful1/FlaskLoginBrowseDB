@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+   <body>
+{% if session['logged_in'] %}
+
+You're logged in already!
+
+{% else %}
+
+ <h3>
+         <a href = "{{ url_for('signup') }}">Sign up</a>
+      </h3>
+
+{%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+
+<form action="/login" method="POST">
+  <input type="username" name="username" placeholder="Username">
+<input type="password" name="password" placeholder="Password">
+<input type="submit" value="Log in">
+</form>
+{% endif %}
+
+
+
+   </body>
+</html>
